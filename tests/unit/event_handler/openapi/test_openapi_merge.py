@@ -69,9 +69,9 @@ def test_is_excluded_with_file_pattern():
     assert _is_excluded(Path("/project/src/handler.py"), root, ["**/test_*.py"]) is False
 
 
-def test_load_resolver_file_not_found():
+def test_load_resolver_file_not_found(tmp_path: Path):
     with pytest.raises(FileNotFoundError):
-        _load_resolver_with_dependencies(Path("/non/existent/file.py"), "app", [], Path("/"))
+        _load_resolver_with_dependencies(tmp_path / "file.py", "app", [], tmp_path)
 
 
 def test_load_resolver_not_found_in_module(tmp_path: Path):
